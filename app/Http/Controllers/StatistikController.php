@@ -82,7 +82,7 @@ class StatistikController extends Controller
 
                 
                 if($inp){
-                    DB::table('indostatistiknews')
+                    DB::table('pgstatistiks')
                         ->where('id_listing', '!=', $icat->id)
                         ->where('post_id_cat', '=', $icat->ID)
                         ->delete();
