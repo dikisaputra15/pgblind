@@ -34,7 +34,7 @@ class Socialconflict extends Command
 
     public function handle()
     {
-        $response = Http::get('https://dev2.code69.my.id/socialconflict');
+        $response = Http::get('https://online.code69.my.id/socialconflict');
 
         if ($response->successful()) {
             $this->info('Social Conflict accessed successfully.');

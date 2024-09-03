@@ -34,7 +34,7 @@ class Explosive extends Command
 
     public function handle()
     {
-        $response = Http::get('https://dev2.code69.my.id/explosivetype');
+        $response = Http::get('https://online.code69.my.id/explosivetype');
 
         if ($response->successful()) {
             $this->info('Weapon accessed successfully.');
