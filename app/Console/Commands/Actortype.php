@@ -34,7 +34,7 @@ class Actortype extends Command
 
     public function handle()
     {
-        $response = Http::get('https://online.code69.my.id/actortype');
+        $response = Http::get('https://pg.code69.my.id/actortype');
 
         if ($response->successful()) {
             $this->info('Actor Type accessed successfully.');
