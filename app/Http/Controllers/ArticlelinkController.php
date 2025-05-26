@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class ViolenceController extends Controller
+class ArticlelinkController extends Controller
 {
     public function index()
     {
@@ -14,15 +14,15 @@ class ViolenceController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-08-29', '2024-08-31'];
+        // $tgl_coba = ['2024-02-01', '2024-02-10'];
 
-        $violences = DB::table('g3c_postmeta')
+        $regions = DB::table('g3c_postmeta')
             ->join('g3c_posts', 'g3c_posts.ID', '=', 'g3c_postmeta.post_id')
             ->join('g3c_w2gm_locations_relationships', 'g3c_w2gm_locations_relationships.post_id', '=', 'g3c_postmeta.post_id')
             ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('g3c_postmeta.meta_key', '_content_field_178')
+            ->where('g3c_postmeta.meta_key', '_content_field_179')
             ->get();
 
         //    $no = 1;
@@ -31,19 +31,12 @@ class ViolenceController extends Controller
         //     }
 
 
-        if($violences->isNotEmpty()){
-            foreach($violences as $violence){
-                if($violence->meta_value == 1){
-                    $viol = 'Violent';
-                }elseif($violence->meta_value == 2){
-                    $viol = 'Non-violent';
-                }else{
-                    $viol = NULL;
-                }
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
                 DB::table('pgstatistiks')
-                    ->where('id_listing', $violence->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'violence' => $viol
+                        'article_link' => $region->meta_value
                     ]);
             }
 
@@ -54,4 +47,3 @@ class ViolenceController extends Controller
 
     }
 }
-

@@ -16,26 +16,26 @@ class SocialconflictController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_coba = ['2024-08-29', '2024-08-31'];
 
-        $sconflicts = DB::table('wp_w2gm_locations_relationships')
-            ->join('wp_term_relationships', 'wp_term_relationships.object_id', '=', 'wp_w2gm_locations_relationships.post_id')
-            ->join('wp_term_taxonomy', 'wp_term_taxonomy.term_taxonomy_id', '=', 'wp_term_relationships.term_taxonomy_id')
-            ->join('wp_terms', 'wp_terms.term_id', '=', 'wp_term_taxonomy.term_id')
-            ->join('wp_posts', 'wp_posts.ID', '=', 'wp_w2gm_locations_relationships.post_id')
-            ->select('wp_w2gm_locations_relationships.id', 'wp_terms.name')
-            ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
-            // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+        $sconflicts = DB::table('g3c_w2gm_locations_relationships')
+            ->join('g3c_term_relationships', 'g3c_term_relationships.object_id', '=', 'g3c_w2gm_locations_relationships.post_id')
+            ->join('g3c_term_taxonomy', 'g3c_term_taxonomy.term_taxonomy_id', '=', 'g3c_term_relationships.term_taxonomy_id')
+            ->join('g3c_terms', 'g3c_terms.term_id', '=', 'g3c_term_taxonomy.term_id')
+            ->join('g3c_posts', 'g3c_posts.ID', '=', 'g3c_w2gm_locations_relationships.post_id')
+            ->select('g3c_w2gm_locations_relationships.id', 'g3c_terms.name')
+            ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
             ->where(function($query) {
-                $query->where('wp_terms.term_id', 2609)
-                        ->orWhere('wp_terms.term_id', 2611)
-                        ->orWhere('wp_terms.term_id', 2608)
-                        ->orWhere('wp_terms.term_id', 2606)
-                        ->orWhere('wp_terms.term_id', 2607)
-                        ->orwhere('wp_terms.term_id', 2610)
-                        ->orwhere('wp_terms.term_id', 2603)
-                        ->orwhere('wp_terms.term_id', 2604)
-                        ->orwhere('wp_terms.term_id', 2601)
-                        ->orwhere('wp_terms.term_id', 2605)
-                        ->orwhere('wp_terms.term_id', 2602);
+                $query->where('g3c_terms.term_id', 2609)
+                        ->orWhere('g3c_terms.term_id', 2611)
+                        ->orWhere('g3c_terms.term_id', 2608)
+                        ->orWhere('g3c_terms.term_id', 2606)
+                        ->orWhere('g3c_terms.term_id', 2607)
+                        ->orwhere('g3c_terms.term_id', 2610)
+                        ->orwhere('g3c_terms.term_id', 2603)
+                        ->orwhere('g3c_terms.term_id', 2604)
+                        ->orwhere('g3c_terms.term_id', 2601)
+                        ->orwhere('g3c_terms.term_id', 2605)
+                        ->orwhere('g3c_terms.term_id', 2602);
                      })
             ->get();
 

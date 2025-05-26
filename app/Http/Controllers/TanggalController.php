@@ -16,19 +16,19 @@ class TanggalController extends Controller
         $tgl_now = $tgl->format('Y-m-d');
         // $tgl_coba = ['2024-08-29', '2024-08-31'];
 
-        $tanggals = DB::table('wp_postmeta')
-            ->join('wp_posts', 'wp_posts.ID', '=', 'wp_postmeta.post_id')
-            ->join('wp_w2gm_locations_relationships', 'wp_w2gm_locations_relationships.post_id', '=', 'wp_postmeta.post_id')
-            ->select('wp_postmeta.post_id', 'wp_postmeta.meta_value', 'wp_posts.post_date', 'wp_w2gm_locations_relationships.id')
-            ->whereDate(DB::raw('DATE(wp_posts.post_date)'), $tgl_now)
-            // ->whereBetween(DB::raw('DATE(wp_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('wp_postmeta.meta_key', '_content_field_89_date_end')
+        $tanggals = DB::table('g3c_postmeta')
+            ->join('g3c_posts', 'g3c_posts.ID', '=', 'g3c_postmeta.post_id')
+            ->join('g3c_w2gm_locations_relationships', 'g3c_w2gm_locations_relationships.post_id', '=', 'g3c_postmeta.post_id')
+            ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('g3c_postmeta.meta_key', '_content_field_89_date_end')
             ->get();
 
         //    $no = 1;
         //     foreach ($tanggals as $tanggal) {
         //         echo $no++ . " " . $tanggal->id . "<br>";
-        //     } 
+        //     }
 
 
         if($tanggals->isNotEmpty()){

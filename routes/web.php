@@ -30,3 +30,4 @@ Route::get('/tanggal', [App\Http\Controllers\TanggalController::class, 'index'])
 Route::get('/subactortype', [App\Http\Controllers\SubactortypeController::class, 'index']);
 Route::get('/explosivetype', [App\Http\Controllers\ExplosivetypeController::class, 'index']);
 Route::get('/violence', [App\Http\Controllers\ViolenceController::class, 'index']);
+Route::get('/articlelink', [App\Http\Controllers\ArticlelinkController::class, 'index']);

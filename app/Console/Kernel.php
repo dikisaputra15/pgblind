@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Targettype::class,
         \App\Console\Commands\Tanggal::class,
         \App\Console\Commands\Violence::class,
+        \App\Console\Commands\Articlelink::class,
     ];
     /**
      * Define the application's command schedule.
@@ -52,6 +53,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('task:runexplosive')->everyFifteenMinutes();
 
         $schedule->command('task:runviolence')->everyFifteenMinutes();
+
+        $schedule->command('task:runarticlelink')->everyFifteenMinutes();
     }
 
     /**
