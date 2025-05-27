@@ -22,7 +22,7 @@ class ArticlelinkController extends Controller
             ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('g3c_postmeta.meta_key', '_content_field_179')
+            ->where('g3c_postmeta.meta_key', '_content_field_92')
             ->get();
 
         //    $no = 1;
@@ -33,10 +33,19 @@ class ArticlelinkController extends Controller
 
         if($regions->isNotEmpty()){
             foreach($regions as $region){
+
+                $html = $region->meta_value;
+
+                if (preg_match('/href="(https:\/\/[^"]+)"/', $html, $matches)) {
+                    $link = $matches[1];
+                } else {
+                    $link = null;
+                }
+
                 DB::table('pgstatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'article_link' => $region->meta_value
+                        'article_link' => $link
                     ]);
             }
 
