@@ -15,13 +15,20 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Weapon::class,
         \App\Console\Commands\Explosive::class,
         \App\Console\Commands\Actor::class,
-        \App\Console\Commands\Actortype::class,
-        \App\Console\Commands\Subactortype::class,
         \App\Console\Commands\Target::class,
         \App\Console\Commands\Targettype::class,
         \App\Console\Commands\Tanggal::class,
         \App\Console\Commands\Violence::class,
         \App\Console\Commands\Articlelink::class,
+        \App\Console\Commands\Business::class,
+        \App\Console\Commands\Civilian::class,
+        \App\Console\Commands\Community::class,
+        \App\Console\Commands\Crimegroup::class,
+        \App\Console\Commands\Intellegence::class,
+        \App\Console\Commands\Military::class,
+        \App\Console\Commands\Police::class,
+        \App\Console\Commands\Separatist::class,
+        \App\Console\Commands\Vested::class,
     ];
     /**
      * Define the application's command schedule.
@@ -40,21 +47,35 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('task:runactor')->everyFifteenMinutes();
 
-        $schedule->command('task:runactortype')->everyFifteenMinutes();
-
         $schedule->command('task:runtarget')->everyFifteenMinutes();
 
         $schedule->command('task:runtargettype')->everyFifteenMinutes();
 
         $schedule->command('task:runtanggal')->everyFifteenMinutes();
 
-        $schedule->command('task:runsubactortype')->everyFifteenMinutes();
-
         $schedule->command('task:runexplosive')->everyFifteenMinutes();
 
         $schedule->command('task:runviolence')->everyFifteenMinutes();
 
         $schedule->command('task:runarticlelink')->everyFifteenMinutes();
+
+        $schedule->command('task:runbusiness')->everyFifteenMinutes();
+
+        $schedule->command('task:runcivilian')->everyFifteenMinutes();
+
+        $schedule->command('task:runcommunity')->everyFifteenMinutes();
+
+        $schedule->command('task:runcrimegroup')->everyFifteenMinutes();
+
+        $schedule->command('task:runintellegence')->everyFifteenMinutes();
+
+        $schedule->command('task:runmilitary')->everyFifteenMinutes();
+
+        $schedule->command('task:runpolice')->everyFifteenMinutes();
+
+        $schedule->command('task:runseparatist')->everyFifteenMinutes();
+
+        $schedule->command('task:runvested')->everyFifteenMinutes();
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class WeapontypeController extends Controller
+class MilitaryController extends Controller
 {
      public function index()
     {
@@ -22,7 +22,7 @@ class WeapontypeController extends Controller
             ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('g3c_postmeta.meta_key', '_content_field_116')
+            ->where('g3c_postmeta.meta_key', '_content_field_122')
             ->get();
 
         //    $no = 1;
@@ -33,43 +33,33 @@ class WeapontypeController extends Controller
 
         if($regions->isNotEmpty()){
             foreach($regions as $region){
-                if($region->meta_value == 1){
-                    $reg = 'Arson';
-                }elseif($region->meta_value == 6){
-                    $reg = 'Firearm';
-                }elseif($region->meta_value == 13){
-                    $reg = 'Physical Violence';
-                }elseif($region->meta_value == 2){
-                    $reg = 'Blunt Force Weapon';
+                if($region->meta_value == 3){
+                    $reg = 'Air Force';
                 }elseif($region->meta_value == 7){
-                    $reg = 'Hazardous Chemicals';
-                }elseif($region->meta_value == 14){
-                    $reg = 'Poison';
-                }elseif($region->meta_value == 3){
-                    $reg = 'CBRN';
-                }elseif($region->meta_value == 8){
-                    $reg = 'Improvised weapons';
-                }elseif($region->meta_value == 11){
-                    $reg = 'No Weapons';
+                    $reg = 'Marines';
+                }elseif($region->meta_value == 6){
+                    $reg = 'Navy SF';
                 }elseif($region->meta_value == 4){
-                    $reg = 'Edged Weapon';
+                    $reg = 'Air Force SF';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Marines SF';
                 }elseif($region->meta_value == 9){
-                    $reg = 'Military-grade firearms';
-                }elseif($region->meta_value == 12){
-                    $reg = 'Other';
+                    $reg = 'Special Operation Command';
+                }elseif($region->meta_value == 1){
+                    $reg = 'Army';
                 }elseif($region->meta_value == 5){
-                    $reg = 'Explosive';
+                    $reg = 'Navy';
                 }elseif($region->meta_value == 10){
-                    $reg = 'Multiple Weapons';
-                }elseif($region->meta_value == 15){
-                    $reg = 'Unknown/Unclear';
+                    $reg = 'Other';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Army SF';
                 }else{
                     $reg = NULL;
                 }
                 DB::table('pgstatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'weapon_type' => $reg
+                        'actor_type' => $reg
                     ]);
             }
 

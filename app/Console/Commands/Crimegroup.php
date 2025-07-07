@@ -7,39 +7,38 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
-class Subactortype extends Command
+class Crimegroup extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'task:runsubactortype';
+    protected $signature = 'task:runcrimegroup';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'subactortype added';
+    protected $description = 'crimegroup added';
 
     /**
      * Execute the console command.
      */
-
-     public function __construct()
-     {
-         parent::__construct();
-     }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function handle()
     {
-        $response = Http::get('https://pg.code69.my.id/subactortype');
+        $response = Http::get('https://pg.code69.my.id/crimegroup');
 
         if ($response->successful()) {
-            $this->info('Actor Type accessed successfully.');
+            $this->info('crimegroup accessed successfully.');
         } else {
-            $this->error('Failed to access Actor Type.');
+            $this->error('Failed to access crimegroup.');
         }
     }
 }

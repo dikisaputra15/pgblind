@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class WeapontypeController extends Controller
+class VestedController extends Controller
 {
-     public function index()
+    public function index()
     {
         // ini_set('max_execution_time', 3600);
 
@@ -22,7 +22,7 @@ class WeapontypeController extends Controller
             ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('g3c_postmeta.meta_key', '_content_field_116')
+            ->where('g3c_postmeta.meta_key', '_content_field_127')
             ->get();
 
         //    $no = 1;
@@ -33,43 +33,33 @@ class WeapontypeController extends Controller
 
         if($regions->isNotEmpty()){
             foreach($regions as $region){
-                if($region->meta_value == 1){
-                    $reg = 'Arson';
+                if($region->meta_value == 3){
+                    $reg = 'Activist Group';
                 }elseif($region->meta_value == 6){
-                    $reg = 'Firearm';
-                }elseif($region->meta_value == 13){
-                    $reg = 'Physical Violence';
-                }elseif($region->meta_value == 2){
-                    $reg = 'Blunt Force Weapon';
-                }elseif($region->meta_value == 7){
-                    $reg = 'Hazardous Chemicals';
-                }elseif($region->meta_value == 14){
-                    $reg = 'Poison';
-                }elseif($region->meta_value == 3){
-                    $reg = 'CBRN';
-                }elseif($region->meta_value == 8){
-                    $reg = 'Improvised weapons';
-                }elseif($region->meta_value == 11){
-                    $reg = 'No Weapons';
-                }elseif($region->meta_value == 4){
-                    $reg = 'Edged Weapon';
-                }elseif($region->meta_value == 9){
-                    $reg = 'Military-grade firearms';
-                }elseif($region->meta_value == 12){
-                    $reg = 'Other';
+                    $reg = 'Political Party';
                 }elseif($region->meta_value == 5){
-                    $reg = 'Explosive';
+                    $reg = 'Union/Labor Group';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Hard-line/Radicalized Group';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Political Party Supporter';
+                }elseif($region->meta_value == 1){
+                    $reg = 'Vested Interest - Stakeholder';
+                }elseif($region->meta_value == 2){
+                    $reg = 'International Activist Group/Organization';
+                }elseif($region->meta_value == 7){
+                    $reg = 'Political Party Wing Group';
                 }elseif($region->meta_value == 10){
-                    $reg = 'Multiple Weapons';
-                }elseif($region->meta_value == 15){
-                    $reg = 'Unknown/Unclear';
+                    $reg = 'Other';
+                }elseif($region->meta_value == 4){
+                    $reg = 'NGO';
                 }else{
                     $reg = NULL;
                 }
                 DB::table('pgstatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'weapon_type' => $reg
+                        'actor_type' => $reg
                     ]);
             }
 

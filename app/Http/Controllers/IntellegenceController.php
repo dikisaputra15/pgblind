@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class SocialconflictController extends Controller
+class IntellegenceController extends Controller
 {
-   public function index()
+     public function index()
     {
         // ini_set('max_execution_time', 3600);
 
@@ -22,7 +22,7 @@ class SocialconflictController extends Controller
             ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
             ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
             // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-            ->where('g3c_postmeta.meta_key', '_content_field_103')
+            ->where('g3c_postmeta.meta_key', '_content_field_121')
             ->get();
 
         //    $no = 1;
@@ -33,39 +33,19 @@ class SocialconflictController extends Controller
 
         if($regions->isNotEmpty()){
             foreach($regions as $region){
-                if($region->meta_value == 1){
-                    $reg = 'Communal Violence';
-                }elseif($region->meta_value == 6){
-                    $reg = 'Motorcycle Gang Violence';
-                }elseif($region->meta_value == 11){
-                    $reg = 'Road Rage';
-                }elseif($region->meta_value == 2){
-                    $reg = 'Election Violence';
-                }elseif($region->meta_value == 8){
-                    $reg = 'Political-motivated Violence';
-                }elseif($region->meta_value == 12){
-                    $reg = 'Soccer Violence';
+                if($region->meta_value == 2){
+                    $reg = 'Military';
+                }elseif($region->meta_value == 1){
+                    $reg = 'National';
                 }elseif($region->meta_value == 3){
-                    $reg = 'Land Dispute/Conflict';
-                }elseif($region->meta_value == 9){
-                    $reg = 'Religious Violence';
-                }elseif($region->meta_value == 13){
-                    $reg = 'Youth Violence';
-                }elseif($region->meta_value == 4){
-                    $reg = 'Martial Arts Group Violence';
-                }elseif($region->meta_value == 10){
-                    $reg = 'Riot';
-                }elseif($region->meta_value == 7){
-                    $reg = 'Other';
-                }elseif($region->meta_value == 5){
-                    $reg = 'Mass Organization Violence';
+                    $reg = 'Police';
                 }else{
                     $reg = NULL;
                 }
                 DB::table('pgstatistiks')
                     ->where('id_listing', $region->id)
                     ->update([
-                        'sub_incident_type' => $reg
+                        'actor_type' => $reg
                     ]);
             }
 

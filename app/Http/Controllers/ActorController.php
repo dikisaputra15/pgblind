@@ -14,42 +14,61 @@ class ActorController extends Controller
 
         $tgl = Carbon::now();
         $tgl_now = $tgl->format('Y-m-d');
-        // $tgl_coba = ['2024-10-14', '2024-10-15'];
+        // $tgl_coba = ['2024-08-29', '2024-08-31'];
 
-        $actors = DB::table('g3c_w2gm_locations_relationships')
-        ->join('g3c_term_relationships', 'g3c_term_relationships.object_id', '=', 'g3c_w2gm_locations_relationships.post_id')
-        ->join('g3c_term_taxonomy', 'g3c_term_taxonomy.term_taxonomy_id', '=', 'g3c_term_relationships.term_taxonomy_id')
-        ->join('g3c_terms', 'g3c_terms.term_id', '=', 'g3c_term_taxonomy.term_id')
-        ->join('g3c_posts', 'g3c_posts.ID', '=', 'g3c_w2gm_locations_relationships.post_id')
-        ->select('g3c_w2gm_locations_relationships.id', 'g3c_terms.name')
-        ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
-        // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
-        ->where(function($query) {
-            $query->Where('g3c_terms.term_id', 2535)
-                ->orWhere('g3c_terms.term_id', 2537)
-                ->orWhere('g3c_terms.term_id', 2488)
-                ->orWhere('g3c_terms.term_id', 2506)
-                ->orWhere('g3c_terms.term_id', 2538)
-                ->orWhere('g3c_terms.term_id', 2539)
-                ->orWhere('g3c_terms.term_id', 2489)
-                ->orWhere('g3c_terms.term_id', 2493)
-                ->orWhere('g3c_terms.term_id', 2541)
-                ->orWhere('g3c_terms.term_id', 2500)
-                ->orWhere('g3c_terms.term_id', 2479)
-                ->orWhere('g3c_terms.term_id', 2505)
-                ->orWhere('g3c_terms.term_id', 2540)
-                ->orWhere('g3c_terms.term_id', 2536);
-            })
-        ->get();
+        $regions = DB::table('g3c_postmeta')
+            ->join('g3c_posts', 'g3c_posts.ID', '=', 'g3c_postmeta.post_id')
+            ->join('g3c_w2gm_locations_relationships', 'g3c_w2gm_locations_relationships.post_id', '=', 'g3c_postmeta.post_id')
+            ->select('g3c_postmeta.post_id', 'g3c_postmeta.meta_value', 'g3c_posts.post_date', 'g3c_w2gm_locations_relationships.id')
+            ->whereDate(DB::raw('DATE(g3c_posts.post_date)'), $tgl_now)
+            // ->whereBetween(DB::raw('DATE(g3c_posts.post_date)'), [$tgl_coba[0], $tgl_coba[1]])
+            ->where('g3c_postmeta.meta_key', '_content_field_118')
+            ->get();
 
-        if($actors->isNotEmpty()){
-            foreach ($actors as $actor){
+        //    $no = 1;
+        //     foreach ($tanggals as $tanggal) {
+        //         echo $no++ . " " . $tanggal->id . "<br>";
+        //     }
+
+
+        if($regions->isNotEmpty()){
+            foreach($regions as $region){
+                if($region->meta_value == 11){
+                    $reg = 'Business Entity';
+                }elseif($region->meta_value == 12){
+                    $reg = 'Foreign Government';
+                }elseif($region->meta_value == 5){
+                    $reg = 'Separatist Group';
+                }elseif($region->meta_value == 3){
+                    $reg = 'Central Government';
+                }elseif($region->meta_value == 4){
+                    $reg = 'Government Security Agency';
+                }elseif($region->meta_value == 9){
+                    $reg = 'Vested Interest/Stakeholder Group';
+                }elseif($region->meta_value == 7){
+                    $reg = 'Civilian';
+                }elseif($region->meta_value == 1){
+                    $reg = 'Local Government';
+                }elseif($region->meta_value == 14){
+                    $reg = 'Other';
+                }elseif($region->meta_value == 8){
+                    $reg = 'Community Group';
+                }elseif($region->meta_value == 2){
+                    $reg = 'Provincial Government';
+                }elseif($region->meta_value == 13){
+                    $reg = 'Unknown/ Unclaimed Responsibility';
+                }elseif($region->meta_value == 10){
+                    $reg = 'Crime Group';
+                }else{
+                    $reg = NULL;
+                }
                 DB::table('pgstatistiks')
-                    ->where('id_listing', $actor->id)
+                    ->where('id_listing', $region->id)
                     ->update([
-                        'actor' => $actor->name
+                        'actor' => $reg
                     ]);
             }
+
             echo "sukses";
         }else{
             echo "empty";

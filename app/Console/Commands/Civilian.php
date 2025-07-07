@@ -7,39 +7,38 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 
-class Actortype extends Command
+class Civilian extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'task:runactortype';
+    protected $signature = 'task:runcivilian';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'actortype added';
+    protected $description = 'civilian added';
 
     /**
      * Execute the console command.
      */
-
-     public function __construct()
-     {
-         parent::__construct();
-     }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function handle()
     {
-        $response = Http::get('https://pg.code69.my.id/actortype');
+        $response = Http::get('https://pg.code69.my.id/civilian');
 
         if ($response->successful()) {
-            $this->info('Actor Type accessed successfully.');
+            $this->info('civilian accessed successfully.');
         } else {
-            $this->error('Failed to access Actor Type.');
+            $this->error('Failed to access civilian.');
         }
     }
 }
