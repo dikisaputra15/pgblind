@@ -122,7 +122,7 @@ class TargetController extends Controller
                 }elseif($region->meta_value == 48){
                     $reg = 'National Conglomerate - Multinational Corporation';
                 }elseif($region->meta_value == 45){
-                    $reg = 'Small or Medium Business/Firms';
+                    $reg = 'Small or Medium Business/Firm';
                 }elseif($region->meta_value == 24){
                     $reg = 'Local Community Group';
                 }elseif($region->meta_value == 19){
