@@ -56,7 +56,7 @@ class ActorController extends Controller
                 }elseif($region->meta_value == 2){
                     $reg = 'Provincial Government';
                 }elseif($region->meta_value == 13){
-                    $reg = 'Unknown/ Unclaimed Responsibility';
+                    $reg = 'Unknown/Unclaimed Responsibility';
                 }elseif($region->meta_value == 10){
                     $reg = 'Crime Group';
                 }else{
