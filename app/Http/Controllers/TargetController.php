@@ -112,7 +112,7 @@ class TargetController extends Controller
                 }elseif($region->meta_value == 2){
                     $reg = 'Provincial Government';
                 }elseif($region->meta_value == 44){
-                    $reg = 'Large Business/Firms';
+                    $reg = 'Large Business/Firm';
                 }elseif($region->meta_value == 47){
                     $reg = 'National Conglomerate';
                 }elseif($region->meta_value == 25){
