@@ -86,7 +86,11 @@ class IncidenttypeController extends Controller
                       ->orwhere('g3c_terms.term_id', 2693)
                       ->orwhere('g3c_terms.term_id', 2694)
                       ->orwhere('g3c_terms.term_id', 2691)
-                      ->orwhere('g3c_terms.term_id', 2692);
+                      ->orwhere('g3c_terms.term_id', 2692)
+                      ->orwhere('g3c_terms.term_id', 4399)
+                      ->orwhere('g3c_terms.term_id', 4400)
+                      ->orwhere('g3c_terms.term_id', 4401)
+                      ->orwhere('g3c_terms.term_id', 4403);
             })
             ->get();
 

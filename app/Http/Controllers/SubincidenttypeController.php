@@ -100,7 +100,12 @@ class SubincidenttypeController extends Controller
                         ->orWhere('g3c_terms.term_id', 2699)
                         ->orWhere('g3c_terms.term_id', 2700)
                         ->orWhere('g3c_terms.term_id', 2702)
-                        ->orWhere('g3c_terms.term_id', 2701);
+                        ->orWhere('g3c_terms.term_id', 2701)
+                        ->orWhere('g3c_terms.term_id', 4398)
+                        ->orWhere('g3c_terms.term_id', 4397)
+                        ->orWhere('g3c_terms.term_id', 4396)
+                        ->orWhere('g3c_terms.term_id', 4395)
+                        ->orWhere('g3c_terms.term_id', 4402);
             })
             ->get();
 
